@@ -1,55 +1,72 @@
 /*
-1. Create a button element in HTML the queues the first question (maybe create a function that causes the first question to appear)
-THEN a timer starts and I am presented with a question > timer (maybe make wrong answers in object and set conditional statement so if wrong answer is clicked then time is substracted) + HTML element divs that hold question
-WHEN I answer a question (question, maybe make questions an object)
-THEN I am presented with another question > need a clear condition, if user answers correctly, queue next question, make this a function
-WHEN I answer a question incorrectly (i.e. wrong thing is selected from the object)
-THEN time is subtracted from the clock > timer needs a conditional if wrong answer is clicked (event), then time is subtracted from clock
-if the user clicks correct answer
-WHEN all questions are answered or the timer reaches 0 > "win/end condition"
-THEN the game is over
-WHEN the game is over
+1. Create a button element in HTML that is used to queue the first question and start a timer.
+2. Create placeholder html elements for the question and possible answers.
+3. Create a function that:
+    - causes the question/answer elements to appear
+    - causes the start button to dissapear
+    - loads the questions content into the existing html elements
+4. Create function with a conditional statement that:
+    -validates if the user selects the right answer button
+    -takes time off the timer if they chose wrong
+    -if they answer correct, then run function 3?
+5. Create a function that:
+    -if time reaches 0, the quiz ends, "Try again!"
+    - all correct answers have been clicked, the quiz ends "You did it!"
 THEN I can save my initials and my score > need to create local storage save
 */
 
-
+var questionEl = document.querySelector("#question");
+var button1 = document.querySelector("#ans1");
+//make the rest of the buttons as above
+var currentQuestion = 0;
 var startButton = document.querySelector(".start-button");
 //structure array with objects
 
-var question1 = {
+var count = 3; //keep track of correct number of right answers selected
+
+// changed object questions to array with objects per advice of Lori (instructor)
+var questions = [
+    {
     questionTitle: "What does HTML stand for?",
-    questionAns1: "Hope to move last",
-    questionAns2: "How to make link",
-    questionAns3: "I dunno",
-    questionAns4: "The right answer"};
-
-var question2 = {
+    posAns: ["HyperText Markup Language", "HotMail Markup Language", "HyperText Markup Loop", "Any of the above"],
+    correct: "HyperText Markup Language"
+    },
+    {
     questionTitle: "What can be stored in an array?",
-    questionAns1: "numbers",
-    questionAns2: "booleans",
-    questionAns3: "strings",
-    questionAns4: "all of the above"
-};
+    posAns: ["numbers", "booleans", "strings", "all of the above"],
+    correct: "all of the above"
+    }
+]
+    
 
+// Event listener to start button to call startQuiz function on click
+startButton.addEventListener("click", startQuiz);
+
+//Page loads with question and answer elements hidden
 document.getElementById("question-container").style.visibility = "hidden";
 
+// Hides the start button, shows the question elements, starts the timer
 function startQuiz() {
     document.getElementById("question-container").style.visibility = "visible";
-    // will need to start a timer
+    document.querySelector(".start-button").style.visibility = "hidden";
+    //startTimer() -need to write this function
+    loadQuestion(); 
 }
+button1.addEventListener("click", loadQuestion);
 
+// loops through questions array to render questions
 function loadQuestion() {
-    //for loop replace
-    document.getElementById("question").textContent = question1.questionTitle;
-    document.getElementById("ans1").textContent = question1.questionAns1;
-    document.getElementById("ans2").textContent = question1.questionAns2;
-    document.getElementById("ans3").textContent = question1.questionAns3;
-    document.getElementById("ans4").textContent = question1.questionAns4;
+    //for loop 
+    for (let i = 0; i < questions[currentQuestion].posAns.length; i++) {
+        button1.textContent = questions[currentQuestion].posAns[i];
+    }
+    questionEl.textContent = questions[currentQuestion].questionTitle;
+    currentQuestion += 1;
 }
 
 function nextQuestion() {
-    
+    //use this to validate user choice
 }
 
-loadQuestion();
-//startQuiz();
+
+
