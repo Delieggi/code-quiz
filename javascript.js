@@ -17,6 +17,9 @@ THEN I can save my initials and my score > need to create local storage save
 
 var questionEl = document.querySelector("#question");
 var button1 = document.querySelector("#ans1");
+var button2 = document.querySelector("#ans2");
+var button3 = document.querySelector("#ans3");
+var button4 = document.querySelector("#ans4");
 //make the rest of the buttons as above
 var currentQuestion = 0;
 var startButton = document.querySelector(".start-button");
@@ -52,21 +55,37 @@ function startQuiz() {
     //startTimer() -need to write this function
     loadQuestion(); 
 }
-button1.addEventListener("click", loadQuestion);
+
+
+
+button2.addEventListener("click", loadQuestion);
+button3.addEventListener("click", loadQuestion);
+button4.addEventListener("click", loadQuestion);
 
 // loops through questions array to render questions
 function loadQuestion() {
     //for loop 
     for (let i = 0; i < questions[currentQuestion].posAns.length; i++) {
-        button1.textContent = questions[currentQuestion].posAns[i];
+        button1.textContent = questions[currentQuestion].posAns[0];
+        button2.textContent = questions[currentQuestion].posAns[1];
+        button3.textContent = questions[currentQuestion].posAns[2]; 
+        button4.textContent = questions[currentQuestion].posAns[3];
     }
     questionEl.textContent = questions[currentQuestion].questionTitle;
     currentQuestion += 1;
-}
 
-function nextQuestion() {
-    //use this to validate user choice
+    button1.addEventListener("click", checkQuestion);
 }
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+function checkQuestion(event) {
+    //use this to validate user choice
+    let check = EventTarget;
+    if (check = "#ans1") {
+        alert("That is correct!");
+        console.log("Yes")
+        loadQuestion();
+    }
+};
 
 
 
