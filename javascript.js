@@ -57,8 +57,8 @@ function startQuiz() {
 }
 
 
-
-button2.addEventListener("click", loadQuestion);
+button1.addEventListener("click", checkQuestion);
+button2.addEventListener("click", checkQuestion);
 button3.addEventListener("click", loadQuestion);
 button4.addEventListener("click", loadQuestion);
 
@@ -74,18 +74,20 @@ function loadQuestion() {
     questionEl.textContent = questions[currentQuestion].questionTitle;
     currentQuestion += 1;
 
-    button1.addEventListener("click", checkQuestion);
+    
 }
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 function checkQuestion(event) {
     //use this to validate user choice
-    let check = EventTarget;
-    if (check = "#ans1") {
+    
+    if (questions[currentQuestion].correct == event.target.value) {
         alert("That is correct!");
         console.log("Yes")
         loadQuestion();
     }
-};
+    // else {
+    //     alert("Try again!") }
+    };
 
 
 
